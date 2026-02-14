@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import Navbar from './components/Navbar'
+import { Route, Routes } from 'react-router-dom'
+import LandingPage from './pages/LandingPage'
+import DetailaComponent from './components/DetailaComponent'
+import SendOtp from './user_email/SendOtp'
+import OtpVerify from './user_email/OtpVerify'
+import ShowCart from './components/ShowCart'
+import Invoice from './components/Invoice'
+import AllProducts from './products/AllProducts'
+import FruitProducts from './products/FruitProducts'
+import VegetableProducts from './products/VegetableProducts'
+import FoodGrains from './products/FoodGrains'
+import AddProduct from './admin/AddProduct'
+import SearchComp from './components/SearchComp'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <Navbar />
+      <SearchComp />
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/single/:id' element={<DetailaComponent />} />
+        <Route path='/send-otp' element={<SendOtp />} />
+        <Route path='/verify-otp' element={<OtpVerify />} />
+        <Route path='/cart' element={<ShowCart />} />
+        <Route path='/invoice' element={<Invoice />} />
+        <Route path='/add-[roduct' element={<AddProduct />} />
+        <Route path='/all-product' element={<AllProducts />} />
+        <Route path='/fruit-products' element={<FruitProducts />} />
+        <Route path='/vegetables' element={<VegetableProducts />} />
+        <Route path='/food-grains' element={<FoodGrains />} />
+      </Routes>
+    </div>
   )
 }
 
