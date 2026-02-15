@@ -11,10 +11,6 @@ app.use(express.json())
 
 app.use("/api", productRouter)
 
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
-})
-
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     console.log("DB Connected Sucessfully");
@@ -23,3 +19,6 @@ mongoose.connect(process.env.MONGO_URI)
     console.log(error.message);
 })
 
+app.listen(PORT, () => {
+    console.log(`Server running on ${PORT}`);
+})
