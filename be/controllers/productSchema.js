@@ -18,8 +18,9 @@ exports.createProduct = async (req, res) => {
             return res.status(400).json({ errors })
         }
 
+        let numbericPrice
         if (price !== undefined) {
-            const numbericPrice = Number(price)
+            numbericPrice = Number(price)
             if (Number.isNaN(numbericPrice) || numbericPrice < 0) {
                 errors.push("Field 'price' must be a non-negative number.")
             }
@@ -41,8 +42,12 @@ exports.createProduct = async (req, res) => {
             }
         }
 
+        if (errors.length > 0) {
+            return res.status(400).json({ errors })
+        }
+
         const products = await product.create({
-            name, desc, category, price, unit
+            name, desc, category, price: numbericPrice, unit
         })
         return res.status(201).json({ MSG: "Product Added Sucessfully", products })
     } catch (error) {
