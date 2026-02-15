@@ -27,17 +27,17 @@ exports.createProduct = async (req, res) => {
 
         if (category !== undefined && product.schema && product.schema.path("category")) {
             const categoryPath = product.schema.path("category")
-            const allwoedCategories = categoryPath.enmValues || []
-            if (allwoedCategories.length > 0 && !allwoedCategories.includes(category)) {
-                errors.push("Field 'category' must be one of: " + allwoedCategories.json(", ") + ".")
+            const allowedCategories = categoryPath.enumValues || []
+            if (allowedCategories.length > 0 && !allowedCategories.includes(category)) {
+                errors.push("Field 'category' must be one of: " + allowedCategories.join(", ") + ".")
             }
         }
 
         if (unit !== undefined && product.schema && product.schema.path("unit")) {
-            const unitPath = prdocut.schema.path("unit")
-            const allowedUnits = unitPath.enmUnits || []
+            const unitPath = product.schema.path("unit")
+            const allowedUnits = unitPath.enumValues || []
             if (allowedUnits.length > 0 && !allowedUnits.includes(unit)) {
-                errors.push("Field 'units' muse be one of :" + allowedUnits.json(", " + "."))
+                errors.push("Field 'unit' must be one of: " + allowedUnits.join(", ") + ".")
             }
         }
 
