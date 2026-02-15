@@ -14,6 +14,10 @@ exports.createProduct = async (req, res) => {
             errors.push("Filed 'description' is required and must be a non-empty string")
         }
 
+        if (errors.length > 0) {
+            return res.status(400).json({ errors })
+        }
+
         if (price !== undefined) {
             const numbericPrice = Number(price)
             if (Number.isNaN(numbericPrice) || numbericPrice < 0) {
@@ -31,7 +35,7 @@ exports.createProduct = async (req, res) => {
 
         if (unit !== undefined && product.schema && product.schema.path("unit")) {
             const unitPath = prdocut.schema.path("unit")
-            const allowedUnits = category.path.enmUnits || []
+            const allowedUnits = unitPath.enmUnits || []
             if (allowedUnits.length > 0 && !allowedUnits.includes(unit)) {
                 errors.push("Field 'units' muse be one of :" + allowedUnits.json(", " + "."))
             }
@@ -40,7 +44,7 @@ exports.createProduct = async (req, res) => {
         const products = await product.create({
             name, desc, category, price, unit
         })
-        return res.status(200).json({ MSG: "Product Added Sucessfuly", products })
+        return res.status(201).json({ MSG: "Product Added Sucessfully", products })
     } catch (error) {
         return res.status(500).json({ error: "Failed to create product" })
     }

@@ -4,10 +4,12 @@ const dotenv = require("dotenv")
 const app = express()
 const productRouter = require("./routes/productRoutes")
 
-const PORT = 8000
+const PORT = process.env.PORT || 8000
 dotenv.config()
 
 app.use(express.json())
+
+app.use("/api", productRouter)
 
 app.listen(PORT, () => {
     console.log(`Server running on ${PORT}`);
@@ -20,6 +22,4 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((error) => {
     console.log(error.message);
 })
-
-app.use("/api", productRouter)
 
