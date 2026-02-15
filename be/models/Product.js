@@ -20,13 +20,13 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number
     },
-    units: {
+    unit: {
         type: String,
-        values: unit_Enms
+        enum: unit_Enms
     },
     category: {
         type: String,
-        values: category_Enms
+        enum: category_Enms
     },
     isActive: {
         type: Boolean
