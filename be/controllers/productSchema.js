@@ -11,7 +11,7 @@ exports.createProduct = async (req, res) => {
         }
 
         if (typeof desc !== "string" || !desc.trim()) {
-            errors.push("Filed 'description' is required and must be a non-empty string")
+            errors.push("Field 'desc' is required and must be a non-empty string")
         }
 
         if (errors.length > 0) {
