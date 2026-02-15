@@ -1,16 +1,25 @@
 const express = require("express")
-const dotenv = require("dotenv")
 const mongoose = require("mongoose")
+const dotenv = require("dotenv")
+const app = express()
+const productRouter = require("./routes/productRoutes")
 
+const PORT = 8000
 dotenv.config()
 
-console.log(`Server running @ ${PORT}`);
-
-const app = express()
-
-const PORT = 8000;
+app.use(express.json())
 
 app.listen(PORT, () => {
-    console.log("procession", process.env.MONGO_URI);
+    console.log(`Server running on ${PORT}`);
 })
+
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+    console.log("DB Connected Sucessfully");
+})
+.catch((error) => {
+    console.log(error.message);
+})
+
+app.use("/api", productRouter)
 
