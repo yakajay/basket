@@ -49,3 +49,12 @@ exports.createProduct = async (req, res) => {
         return res.status(500).json({ error: "Failed to create product" })
     }
 }
+
+exports.getProducts = async (req, res) => {
+    try {
+        const newProducts = await product.find()
+        return res.status(201).json({MSG: "Products Fetched Successfully", newProducts})
+    } catch (error) {
+        return res.status(500).json({MSG: "Failed to fetch the products"})
+    }
+}
