@@ -24,6 +24,9 @@ const productSchema = new mongoose.Schema({
         type: String,
         enum: unit_Enms
     },
+    image: {
+        type: String
+    },
     category: {
         type: String,
         enum: category_Enms
