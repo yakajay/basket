@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 const app = express()
 const productRouter = require("./routes/productRoutes")
 const cors = require("cors")
+const adminRouter = require("./routes/adminRoutes")
 
 const PORT = process.env.PORT || 8000
 dotenv.config()
@@ -12,6 +13,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use("/api", productRouter)
+app.use("/admin", adminRouter)
 
 mongoose.connect(process.env.MONGO_URI)
 .then(() => {
