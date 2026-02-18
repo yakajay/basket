@@ -6,15 +6,15 @@ exports.sendOtp = async (req, res) => {
     try {
         const { name, email } = req.body
         if (!email) {
-            return res.status(400).json({MSG: "Email Required"})
+            return res.status(400).json({ MSG: "Email Required" })
         }
-        let user = await User.findOne({email})
+        let user = await User.findOne({ email })
         if (!user) {
-            userRecord = await User.create({name, email})
+            userRecord = await User.create({ name, email })
         }
         const otp = generateOtp()
         user.otp = otp
-        user.otpExpires = Date.now() + 5*60*100
+        user.otpExpires = Date.now() + 5 * 60 * 100
         await user.save()
 
         await sendOtpEmail(email, otp)
